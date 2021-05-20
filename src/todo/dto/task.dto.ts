@@ -1,14 +1,11 @@
 import { IsNotEmpty } from "class-validator";
-import { TaskDto } from "./task.dto";
 
-export class TodoDto {
+export class TaskDto {
   @IsNotEmpty()
   id: string;
 
   @IsNotEmpty()
   name: string;
-
+  
   createdOn?: Date;
-  description?: string;
-  tasks?: TaskDto[];
 }
