@@ -4,8 +4,12 @@ import { ConnectionOptions } from 'typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TodoModule } from './todo/todo.module';
+import { UserModule } from './user/user.module';
+import { AuthModule } from './auth/auth.module';
 
-@Module({})
+@Module({
+  imports: [UserModule, AuthModule]
+})
 export class AppModule {
   static forRoot(connOptions: ConnectionOptions): DynamicModule {
     return {
