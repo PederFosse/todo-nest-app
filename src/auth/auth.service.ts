@@ -58,9 +58,7 @@ export class AuthService {
     const expiresIn = process.env.EXPIRESIN;
 
     const user: JwtPayload = { username };
-    console.log('signing token');
     const accessToken = this.jwtService.sign(user);
-    console.log('token signed..');
     return {
       expiresIn,
       accessToken,
