@@ -5,7 +5,6 @@ import { PassportModule } from '@nestjs/passport';
 import { UserModule } from '@user/user.module';
 import { AuthService } from './auth.service';
 import { JwtStrategy } from './jwt.strategy';
-console.log(process.env.SECRETKEY)
 
 @Module({
   imports: [
