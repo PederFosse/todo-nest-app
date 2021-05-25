@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "module": "commonjs",
+    "moduleResolution": "node",
     "declaration": true,
     "removeComments": true,
     "emitDecoratorMetadata": true,
@@ -10,6 +11,12 @@
     "sourceMap": true,
     "outDir": "./dist",
     "baseUrl": "./",
-    "incremental": true
-  }
+    "incremental": true,
+    "paths": {
+      "@todo/*": ["src/todo/*"],
+      "@user/*": ["src/user/*"],
+      "@shared/*": ["src/shared/*"],
+    }
+  },
+  "exclude": ["node_modules"]
 }
