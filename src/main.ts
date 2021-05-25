@@ -1,8 +1,8 @@
+require('dotenv').config()
 import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { getDbConnectionOptions, runDbMigrations } from '@shared/utils';
 import { AppModule } from './app.module';
-require('dotenv').config()
 
 const PORT = process.env.PORT || 3000;
 
