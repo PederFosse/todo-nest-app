@@ -31,8 +31,9 @@ export class TaskService {
 
   // get tasks by todo
   async getTasksByTodo(id: string): Promise<TaskDto[]> {
-    const tasks: TaskEntity[] = await this.taskRepo.find({
+    const tasks: TaskEntity[] = await this.taskRepo.findOne({
       where: { todo: {id} },
+      relations: ['tasks', 'owner']
     });
 
     return tasks.map(task => toTaskDto(task));

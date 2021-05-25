@@ -6,9 +6,9 @@ import { UserEntity } from "@user/entity/user.entity";
 import { UserDto } from "@user/dto/user.dto";
 
 export const toTodoDto = (data: TodoEntity): TodoDto => {
-  const { id, name, description, createdOn, tasks } = data;
+  const { id, name, description, createdOn, tasks, owner } = data;
 
-  let todoDto: TodoDto = { id, name, description, createdOn };
+  let todoDto: TodoDto = { id, name, description, createdOn, owner: owner ? toUserDto(owner) : null };
 
   if (tasks) {
     todoDto = {
