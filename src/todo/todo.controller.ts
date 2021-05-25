@@ -1,4 +1,6 @@
-import { Body, Controller, Delete, Get, Logger, Param, Post, Put, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Logger, Param, Post, Put, Req, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
+import { UserDto } from '@user/dto/user.dto';
 import { toPromise } from 'src/shared/utils';
 import { TodoCreateDto } from './dto/todo.create.dto';
 import { TodoDto } from './dto/todo.dto';
@@ -23,12 +25,16 @@ export class TodoController {
 
   @Post() // create a new todo
   @UsePipes(new ValidationPipe())
-  async create(@Body() todoCreateDto: TodoCreateDto): Promise<TodoDto> {
-    return await this.todoService.createTodo(todoCreateDto);
+  @UseGuards(AuthGuard())
+  async create(@Body() todoCreateDto: TodoCreateDto, @Req() req: any): Promise<TodoDto> {
+    const user = req.user as UserDto;
+
+    return await this.todoService.createTodo(user, todoCreateDto);
   }
 
   @Put(":id") // update a todo by id
   @UsePipes(new ValidationPipe())
+  @UseGuards(AuthGuard())
   async update(
     @Param("id") id: string,
     @Body() todoDto: TodoDto,
@@ -37,6 +43,7 @@ export class TodoController {
   }
 
   @Delete(":id") // delete one todo by id
+  @UseGuards(AuthGuard())
   async destroy(@Param("id") id: string): Promise<TodoDto> {
     return await this.todoService.destroyTodo(id);
   }

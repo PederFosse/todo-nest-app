@@ -1,4 +1,5 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { CreateTaskDto } from '@todo/dto/task.create.dto';
 import { TaskDto } from '@todo/dto/task.dto';
 import { TaskListDto } from '@todo/dto/task.list.dto';
@@ -20,6 +21,7 @@ export class TaskController {
  }
 
  @Post('todo/:id')
+ @UseGuards(AuthGuard())
  async create(
    @Param('id') todo: string,
    @Body() createTaskDto: CreateTaskDto,
@@ -28,6 +30,7 @@ export class TaskController {
  }
 
  @Delete(':id')
+ @UseGuards(AuthGuard())
  async destroy(@Param('id') id: string): Promise<TaskDto> {
    return await this.taskService.destroyTask(id);
  }
