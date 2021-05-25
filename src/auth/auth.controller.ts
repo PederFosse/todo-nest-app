@@ -40,4 +40,10 @@ export class AuthController {
   public async login(@Body() loginUserDto: LoginUserDto): Promise<LoginStatus> {
     return await this.authService.login(loginUserDto);
   }
+
+  @Get('whoami')
+  @UseGuards(AuthGuard())
+  public async testAuth(@Req() req: any): Promise<JwtPayload> {
+    return req.user;
+  }
 }
